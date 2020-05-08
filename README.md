@@ -41,9 +41,9 @@ In each entry, we present metadata of an issue, which are 'url', 'id', 'title', 
 We also record the labels of each issue, which contain 'bug', 'enhancement', 'question', 'ui', 'design', 'database', 'client', 'server', 'document', 'security' and 'performance'. 
 
 In each cell of those label columns: 
-- If the number is 0, it means this issue doesn't have this label, or its synonym originally, and after label augmentation, we still can't apply this label to this issue with enough confidence. 
-- If the number is 1, it means this issue has this label originally. 
-- If the number is 2, it means this issue doesn't have this label originally, but after label augmentation, we apply this label to this issue with enough confidence.
+- If the number is 0, it means this issue doesn't have this label, or its synonym originally, and after label augmentation, we still can't apply this label to this issue with enough confidence. **It's a negative instance.**
+- If the number is 1, it means this issue has this label originally. **It's a positive instance.**
+- If the number is 2, it means this issue doesn't have this label originally, but after label augmentation, we apply this label to this issue with enough confidence. **It's a positive instance.**
 
 ### raw data for experiment
 
