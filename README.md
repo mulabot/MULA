@@ -2,15 +2,11 @@
 
 ## How to install app 
 
-MULA Label Bot can be installed on this [link](https://github.com/apps/mula-label-bot). 
+You can install MULA Label Bot on this [link](https://github.com/apps/mula-label-bot). 
 
 To install, you need to sign in your GitHub account, and click 'install' button on this page. And then, you can select the repository you want to install. 
 
-MULA Label Bot will listen opened issue events from your repository, provide Just-In-Time multi-labeling service.
-
-You can visit our [website](http://149.129.60.210/) to view the summarized predictions for all issues.
-
-PS: For double-blind reviewers, please use an account in your nickname, in case any potential operations recorded by GitHub. 
+MULA Label Bot will listen opened issue events from your repository, give Just-In-Time multi-labeling service.
 
 
 ## Project structure
@@ -21,8 +17,9 @@ MULA-data
 │
 └───raw_data
 │   │   issue_data.csv
-│   │   figure_4.csv
-│   │   figure_5.txt
+│   │   figure_6.csv
+│   │   figure_7.xlsx
+│   │   figure_8.txt
 │   │   RQ2_full_metric_data.csv
 │   │   feedback_data.csv
 ```
@@ -38,26 +35,25 @@ In each entry, we present metadata of an issue, which are 'url', 'id', 'title', 
 - 'body' is the body of an issue.
 - 'label' is the original label of an issue.
 
-We also record the labels of each issue, which contain 'bug', 'enhancement', 'question', 'ui', 'design', 'database', 'client', 'server', 'document', 'security' and 'performance'. 
+We also record the augmented labels of each issue, which contain 'bug', 'enhancement', 'question', 'ui', 'design', 'database', 'client', 'server', 'document', 'security' and 'performance'. 
 
 In each cell of those label columns: 
-- If the number is 0, it means this issue doesn't have this label, or its synonym originally, and after label augmentation, we still can't apply this label to this issue with enough confidence. **It's a negative instance.**
-- If the number is 1, it means this issue has this label originally. **It's a positive instance.**
-- If the number is 2, it means this issue doesn't have this label originally, but after label augmentation, we apply this label to this issue with enough confidence. **It's a positive instance.**
+- If the number is 0, it means this issue doesn't have this label, or its synonym originally, and after label augmentation, we still can't apply this label to this issue with enough confidence. 
+- If the number is 1, it means this issue has this label originally. 
+- If the number is 2, it means this issue doesn't have this label originally, but after label augmentation, we apply this label to this issue with enough confidence.
 
 ### raw data for experiment
 
-- `figure_4.cvs` records the raw data for Figure 4, f1 and other metric values comparison between MULA and other methods in our paper.
-
-- `figure_5.txt` contains the raw data for Figure 5, the output threshold adjustment for two labels, 'bug' and 'document', in our paper.
-
+- `figure_6.csv` records the raw data for Figure 6, that is, the F1 values comparision between MULA and the other methods in our paper.
+- `figure_7.xlsx ` records the raw data for Figure 7, that is, the f1 values for MULA and the other methods in our paper, running on the 10 subsets.
+- `figure_8.txt` contains the raw data for Figure 8, that is, the output threshold adjustment for two labels, 'bug' and 'document', in our paper.
 - `RQ2_full_metric_data.csv` is the file containing all the metric values from RQ2.
+
+
 
 ### user feedback 
 
-`feedback_data.csv` contains the feedback data we collected. 
-
-In each entry of this csv file, you can see the issue title, issue body, predicted label or unpredicted label, likes and dislikes, confidence score, and its label status of each MULA prediction comment.
+`feedback_data.csv`, we present the feedback data we collected. In each entry of this csv file, you can see the issue title, issue body, predicted label or unpredicted label, likes and dislikes, confidence score, and its label status of each MULA prediction comment.
 
 
 ## Configurations to repeat the experiment
@@ -80,13 +76,13 @@ In RQ2, please use those parameters:
 
 In this RQ, we compare efficiency of several methods. And we will show parameters configuration of those methods. 
 
+We used toolkit from `sklearn` and `skmultilearn` in first three method. 
+
 - BR + RandomForest
 
-In first three method, we use toolkit from `sklearn` and `skmultilearn` in first three method. 
+We just use the default configuration from `sklearn.ensemble` of `sklearn` package.
 
-We just follow the default configuration from `sklearn.ensemble` of `sklearn` package.
-
-Our used classifier and its configuration:
+Our used classifier:
 
 ```
 from skmultilearn.problem_transform import BinaryRelevance
